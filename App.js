@@ -6,18 +6,21 @@ import store from './reduxtooolkit/store'
 import { useFonts } from 'expo-font';
 
 import Index from './Index';
-
+import AppLoading from 'expo-app-loading';
 
 export default function App() {
+
+  
 
 
  
   const [fontsLoaded] = useFonts({
     'bangla-font': require('./assets/fonts/bangla-font.ttf'),
+    'BanglaFont': require('./assets/fonts/bangla-font.ttf'),
   });
 
   if (!fontsLoaded) {
-    return null;
+    return <AppLoading/>;
   }
 
 

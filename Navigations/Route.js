@@ -1,10 +1,10 @@
 //import liraries
 import React from 'react';
-import { SafeAreaView,View, Text, StyleSheet,StatusBar } from 'react-native';
+import { SafeAreaView,View, Text, StyleSheet,StatusBar, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Signup from '../Screens/Signup'
 import Login from '../Screens/Login';
 import Home from '../Screens/Home';
@@ -28,6 +28,10 @@ import AddOfferMain from '../Screens/AddOffer/AddOfferMain';
 import AllOffer from '../Screens/AddOffer/AllOffer';
 
 
+import { clearReduxAdminData } from '../reduxtooolkit/authSlice';
+import { clearAdminData } from '../utils/asyncStorage';
+
+
 
 
 const Stack = createStackNavigator();
@@ -36,9 +40,22 @@ const Stack = createStackNavigator();
 // create a component
 const Routes = () => {
 
+     const dispatch = useDispatch()
+
+
+
   
 
     const adminData = useSelector((state)=> state.auth.admin)
+
+    const onLogout = async()=>{
+
+     await clearAdminData()
+
+     dispatch(clearReduxAdminData())
+     
+     
+    }
 
 
     
@@ -57,14 +74,14 @@ const Routes = () => {
         <Stack.Screen name="Login" component={Login} options={{
              headerTintColor: 'white',
               headerTitle: '',
-              headerRight:()=><Text style={{fontSize:20,color:'white',fontFamily:'bangla-font',paddingRight:170}}>লগ ইন</Text>,   
+              headerRight:()=><Text style={{fontSize:20,color:'white',fontFamily:'BanglaFont',paddingRight:170}}>লগ ইন</Text>,   
        headerStyle: {backgroundColor: '#E31D25'},
 
             }} />
         <Stack.Screen name="Signup" component={Signup} options={{
              headerTintColor: 'white',
               headerTitle: '',
-              headerRight:()=><Text style={{fontSize:20,color:'white',paddingRight:150,fontFamily:'bangla-font'}}>সাইন আপ</Text>,   
+              headerRight:()=><Text style={{fontSize:20,color:'white',paddingRight:150,fontFamily:'BanglaFont'}}>সাইন আপ</Text>,   
        headerStyle: {backgroundColor: '#E31D25'},
 
             }}/>
@@ -74,7 +91,10 @@ const Routes = () => {
         <Stack.Screen name="Home" component={Home} options={{
              headerTintColor: 'white',
               headerTitle: '',
-              headerRight:()=><Text style={{fontSize:20,color:'white',fontFamily:'bangla-font',paddingRight:170}}>ড্যাসবোর্ড</Text>,   
+              headerLeft:()=><Text style={{fontSize:20,color:'white',fontFamily:'BanglaFont',paddingLeft:20}}>ড্যাসবোর্ড</Text> ,   
+       headerStyle: {backgroundColor: '#E31D25'},
+
+       headerRight:()=><Button title='Logout' onPress={onLogout}/> ,   
        headerStyle: {backgroundColor: '#E31D25'},
 
             }} />
@@ -82,7 +102,7 @@ const Routes = () => {
 <Stack.Screen name="MobileBanking" component={MobileBanking} options={{
              headerTintColor: 'white',
               headerTitle: '',
-              headerRight:()=><Text style={{fontSize:17,color:'white',fontFamily:'bangla-font',paddingRight:110}}>মোবাইল ব্যাংকিং ম্যানেজমেন্ট</Text>,   
+              headerRight:()=><Text style={{fontSize:17,color:'white',fontFamily:'BanglaFont',paddingRight:110}}>মোবাইল ব্যাংকিং ম্যানেজমেন্ট</Text>,   
        headerStyle: {backgroundColor: '#E31D25'},
 
             }} />
@@ -90,7 +110,7 @@ const Routes = () => {
 <Stack.Screen name="FlexiLoad" component={FlexiLoad} options={{
              headerTintColor: 'white',
               headerTitle: '',
-              headerRight:()=><Text style={{fontSize:17,color:'white',fontFamily:'bangla-font',paddingRight:110}}>ফ্লেক্সিলোড ম্যানেজমেন্ট</Text>,   
+              headerRight:()=><Text style={{fontSize:17,color:'white',fontFamily:'BanglaFont',paddingRight:110}}>ফ্লেক্সিলোড ম্যানেজমেন্ট</Text>,   
        headerStyle: {backgroundColor: '#E31D25'},
 
             }} />
@@ -98,7 +118,7 @@ const Routes = () => {
 <Stack.Screen name="BillPay" component={BillPay} options={{
              headerTintColor: 'white',
               headerTitle: '',
-              headerRight:()=><Text style={{fontSize:17,color:'white',fontFamily:'bangla-font',paddingRight:110}}>বিল পে ম্যানেজমেন্ট</Text>,   
+              headerRight:()=><Text style={{fontSize:17,color:'white',fontFamily:'BanglaFont',paddingRight:110}}>বিল পে ম্যানেজমেন্ট</Text>,   
        headerStyle: {backgroundColor: '#E31D25'},
 
             }} />
@@ -106,7 +126,7 @@ const Routes = () => {
 <Stack.Screen name="DriveOffer" component={DriveOffer} options={{
              headerTintColor: 'white',
               headerTitle: '',
-              headerRight:()=><Text style={{fontSize:17,color:'white',fontFamily:'bangla-font',paddingRight:110}}>ড্রাইভ অফার ম্যানেজমেন্ট</Text>,   
+              headerRight:()=><Text style={{fontSize:17,color:'white',fontFamily:'BanglaFont',paddingRight:110}}>ড্রাইভ অফার ম্যানেজমেন্ট</Text>,   
        headerStyle: {backgroundColor: '#E31D25'},
 
             }} />
@@ -114,7 +134,7 @@ const Routes = () => {
 <Stack.Screen name="BankTransfer" component={BankTransfer} options={{
              headerTintColor: 'white',
               headerTitle: '',
-              headerRight:()=><Text style={{fontSize:17,color:'white',fontFamily:'bangla-font',paddingRight:110}}>ব্যাংক ট্রান্সফার ম্যানেজমেন্ট</Text>,   
+              headerRight:()=><Text style={{fontSize:17,color:'white',fontFamily:'BanglaFont',paddingRight:110}}>ব্যাংক ট্রান্সফার ম্যানেজমেন্ট</Text>,   
        headerStyle: {backgroundColor: '#E31D25'},
 
             }} />
@@ -122,7 +142,7 @@ const Routes = () => {
 <Stack.Screen name="Balance" component={Balance} options={{
              headerTintColor: 'white',
               headerTitle: '',
-              headerRight:()=><Text style={{fontSize:17,color:'white',fontFamily:'bangla-font',paddingRight:110}}>ব্যালেন্স ম্যানেজমেন্ট</Text>,   
+              headerRight:()=><Text style={{fontSize:17,color:'white',fontFamily:'BanglaFont',paddingRight:110}}>ব্যালেন্স ম্যানেজমেন্ট</Text>,   
        headerStyle: {backgroundColor: '#E31D25'},
 
             }} />

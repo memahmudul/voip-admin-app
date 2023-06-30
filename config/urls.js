@@ -1,4 +1,4 @@
-export const API_BASE_URL = "http://192.168.248.1:8080";
+export const API_BASE_URL = "https://voip-app-dwn1.onrender.com";
 export const getApiUrl = (endpoint) => API_BASE_URL + endpoint
 
 
